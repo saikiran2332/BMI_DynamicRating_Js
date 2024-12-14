@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        display: flex;
+        text-align: center;
+        justify-content: center;
+    }
+    span{
+        color: red;
+        font-size: 20px;
+    }
+    .container{
+        margin-top: 200px;
+        border: 2px solid black;
+        padding:30px;
+        width: 800px;
+        background-color: rgb(246, 246, 142);
+    }
+    .container h3{
+        font-size: 40px;
+    }
+    .out{
+        display: flex;
+        gap:4px;
+    }
+    .inn1{
+        border:2px solid black;
+        background-color: rgb(248, 247, 240);
+        font-size: 18px;
+        padding:5px;
+        width: 50%;
+    }
+    .inn2{
+        padding: 2px;;
+        border :2px solid black;
+        background-color: rgb(242, 242, 229);
+        font-size: 18px;
+        width: 50%;
+    }
+    button{
+        padding:10px;
+        font-size: 15px;
+        width:80px;
+        background-color: rgb(249, 243, 243);
+        color: rgb(13, 13, 13);
+        font-weight:500;
+    }
+    button:hover{
+        color: white;
+        background-color: rgb(241, 77, 77);
+    }
+
+</style>
+<body>
+    <div class="container" >
+        <h3>BMI Mass Calculation</h3>
+        <label name="kg">Weight(KG's) :</label>
+        <input type="number" id="kg" name="kg" placeholder="Enter the weight in Kg's">
+        <span id="weightErr" class="error" ></span><br><br>
+        <label name="meters">Height(m):</label>
+        <input type="number" id="meters" name="meters" placeholder="Enter the height in meters">
+        <span id="heightErr" class="error" ></span><br><br>
+         <button id="but" >Calculate</button>
+         <button id="cle" >Clear</button><br><br>
+        <div class="out">
+            <div class="inn1">
+                <label name="op">Your BMI is :</label>
+                <output type="text" id="op" name="op">
+            </div>
+            <div class="inn2">
+                 <label name="msg">Category :</label>
+                 <output type="text" id="msg" name="msg"></output>
+            </div>
+
+        </div>
+        
+    </div>
+</body>
+<script>
+    const weight=document.getElementById('kg');
+    const height=document.getElementById("meters");
+    const weight_Err=document.getElementById("weightErr");
+    const height_Err=document.getElementById("heightErr");
+    const result=document.getElementById("op");
+    let buto=document.getElementById('but')
+    const para=document.getElementById("msg")
+    const clear=document.getElementById("cle");
+    
+    buto.addEventListener('click',()=>{
+        const value1=weight.value;
+        const value2=height.value;
+        const res=eval(value1/(value2*value2));
+        if(value1!=''&&value2!=''){
+            result.value=res
+        }
+        else{
+            result.value="please enter the valid data"
+        }
+        
+        if(value1==''){
+            weight_Err.textContent="! Enter the valid Weight"
+            
+        }
+        else{
+            weight_Err.textContent=""
+
+        }
+        if(value2==''){
+            height_Err.textContent="! Enter the valid Height"
+            
+        }else{
+            height_Err.textContent=""
+        }
+        //messages of body type
+        if(res>0 && res<=16){
+            para.textContent="Severe thinness"
+        }
+        else if(res>16 && res<=17){
+            para.textContent="Moderate Thinness"
+        }
+        else if(res>17 && res<=18.5){
+            para.textContent="Mild Thinness"
+        }
+        else if(res>18.5 && res<=25){
+            para.textContent="Normal"
+        }
+        else if(res>25 && res<=30){
+            para.textContent="Over Weight"
+        }
+        else if(res>30 && res<=35){
+            para.textContent="Obese class I"
+        }
+        else if(res>35 && res<=40){
+            para.textContent="obese class II"
+        }
+        else if(res>40 && res<Infinity){
+            para.textContent="Obese class III"
+        }
+        else if(res=="please enter the valid data"){
+            para.textContent="Please enter the valid data"
+        }
+
+        else{
+            
+            para.textContent="invalid data"
+        }
+    })
+    clear.addEventListener("click",()=>{
+        weight.value="";
+        height.value='';
+        para.textContent=""
+        result.value=''
+        height_Err.textContent=""
+         weight_Err.textContent=""
+        
+    })
+    
+
+</script>
+</html>
